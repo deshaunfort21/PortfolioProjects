@@ -1,0 +1,116 @@
+--SELECT * FROM patients
+
+/*
+  Start by selecting a question by pressing 'Start' or 'View All Questions'.
+  Use the resources and information about the database from the left panel to help.
+  Press the run button to execute the query.
+  Question is automatically validated every time you execute the query.
+  Make your output match the expected output.
+ 
+ 
+  Keybinds:
+    [ctrl + enter]: Execute the SQL
+    [ctrl + q]: Auto-format the SQL
+*/
+--select first_name, last_name, gender
+--from patients
+--where gender='M'
+
+--select first_name, last_name
+--from patients
+--where allergies is null
+
+--select first_name
+--from patients
+--where first_name like 'C%'
+
+--select first_name, last_name 
+--from patients
+--where weight between 100 and 120
+
+--Update the patients table for the allergies column. If the patient's allergies is null then replace it with 'NKA'
+--update patients
+--set allergies='NKA'
+--where allergies is null
+
+--Show first name and last name concatinated into one column to show their full name.
+--select concat(first_name,' ', last_name)
+--from patients
+
+--Show how many patients have a birth_date with 2010 as the birth year.
+--select count(patient_id)
+--from patients
+--where birth_date like '%2010%'
+
+--Show the first_name, last_name, and height of the patient with the greatest height.
+--select first_name, last_name, max(height) as height
+--from patients
+
+--Show all columns for patients who have one of the following patient_ids:1,45,534,879,1000
+--select * 
+--from patients
+--where patient_id in (1, 45, 534, 879, 1000)
+
+--Show all the columns from admissions where the patient was admitted and discharged on the same day.
+--select * 
+--from admissions
+--where admission_date=discharge_date
+
+--Show the patient id and the total number of admissions for patient_id 579.
+--select patient_id, count(patient_id)
+--from admissions
+--where patient_id=579
+
+--Based on the cities that our patients live in, show unique cities that are in province_id 'NS'?
+--select distinct(city)
+--from patients
+--where province_id='NS'
+
+--Write a query to find the first_name, last name and birth date of patients who has height greater than 160 and weight greater than 70
+--select first_name, last_name, birth_date
+--from patients
+--where height>160 and weight>70
+
+--Based on cities where our patient lives in, write a query to display the list of unique city starting with a vowel (a, e, i, o, u). Show the result order in ascending by city.
+--select distinct city
+--from patients
+--where
+  --city like 'a%'
+  --or city like 'e%'
+  --or city like 'i%'
+  --or city like 'o%'
+  --or city like 'u%'
+--order by city
+
+--Show unique birth years from patients and order them by ascending.
+--select distinct year(birth_date) as birth_year
+--from patients
+--order by birth_year
+
+--Show unique first names from the patients table which only occurs once in the list.
+--select distinct(first_name)
+--from patients
+--group by first_name
+--having count(first_name)=1
+
+--Show patient_id and first_name from patients where their first_name start and ends with 's' and is at least 6 characters long.
+--select patient_id, first_name
+--from patients
+--where first_name like ('s____%s')
+
+--Show patient_id, first_name, last_name from patients whos diagnosis is 'Dementia'.
+--select p.patient_id, p.first_name, p.last_name
+--from patients p
+--join admissions a
+--on p.patient_id=a.patient_id
+--where a.diagnosis='Dementia'
+
+--Display every patient's first_name. Order the list by the length of each name and then by alphbetically
+--select first_name
+--from patients
+--order by len(first_name), first_name
+
+--Show the total amount of male patients and the total amount of female patients in the patients table. Display the two results in the same row.
+--SELECT 
+  --(SELECT count(*) FROM patients WHERE gender='M') AS male_count, 
+  --(SELECT count(*) FROM patients WHERE gender='F') AS female_count;
